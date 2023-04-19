@@ -1,0 +1,20 @@
+/* Colors the background of every page */
+.body {
+  background-color: #ffb347;
+}
+
+/* Login page stylings */
+.indexStyles {
+  background-color: #3c7e2b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/* Colors the background of the header blocks, and the text */
+.loginHeader,
+.registerHeader {
+  background-color: #8ed17e;
+}
+.loginHeader h3,
+.registerheader h3 {
+  color: #3c7e2b;
+}
