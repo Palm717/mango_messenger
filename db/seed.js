@@ -39,23 +39,23 @@ db.sync({ force: true }).then(() => {
   });
 });
 
-db.sync({ force: true }).then(() =>
-  Promise.all([
-    Conversations.bulkCreate([{}]),
-    Messages.bulkCreate([{}]),
-    UserConversations.bulkCreate([{}]),
-    Users.bulkCreate([{}]),
-    {
-      username: "Bob",
-      password: "woeifwefwef",
-      email: "owiejfwef@woefijwef.com",
-      created_at: "Tuesday",
-    },
-    {
-      username: "Jimmy",
-      password: "wikuiuikef",
-      email: "owsaedfwefef@woefiyiuluibvf.com",
-      created_at: "Wednesday",
-    },
-  ])
-);
+// db.sync({ force: true }).then(() =>
+//   Promise.all([
+//     Conversations.bulkCreate([{}]),
+//     Messages.bulkCreate([{}]),
+//     UserConversations.bulkCreate([{}]),
+//     Users.bulkCreate([{}]),
+//     {
+//       username: "Bob",
+//       password: "woeifwefwef",
+//       email: "owiejfwef@woefijwef.com",
+//       created_at: "Tuesday",
+//     },
+//     {
+//       username: "Jimmy",
+//       password: "wikuiuikef",
+//       email: "owsaedfwefef@woefiyiuluibvf.com",
+//       created_at: "Wednesday",
+//     },
+//   ])
+// );

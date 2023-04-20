@@ -55,12 +55,12 @@ db.sync().then(() => {
 
 // Message appears in the console once a user Logs in
 io.on("connection", (socket) => {
-  console.log("user connected");
+  console.log("A user connected");
   socket.on("chat message", (msg) => {
     socket.emit("chat message", msg);
   });
   // When a user disconnects a message should print in the console
   socket.on("disconnect", (msg) => {
-    console.log("user disconnected");
+    console.log("A user disconnected");
   });
 });
