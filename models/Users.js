@@ -1,6 +1,6 @@
 //require the correct modules
 const { Model, DataTypes } = require("sequelize");
-const db = require('../config/connection');
+const db = require("../config/connection");
 
 //extend sequelize model on class Users
 class Users extends Model {}
@@ -37,6 +37,15 @@ Users.init(
   {
     sequelize: db,
     modelName: "Users",
+    hooks: {
+      // Do something right before the user is stored to the table
+      async beforeCreate(Users) {
+        //bcrypt will return an encrypted string mixing the standard password string with 10 levels of salt
+        const encrypted_pass = await bcrypt.hash(Users.password, 10);
+        //Store the encrypted password to the database instead of the standard string
+        Users.pass = encrypted_pass;
+      },
+    },
   }
 );
 

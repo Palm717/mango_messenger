@@ -12,14 +12,14 @@ The user will have visible to them a header with nav bar. From there the user ca
 </header>
 
 <div class="greeting">
-    <h2>Dashboard</h2>
+    <h2>Group Chats</h2>
     <p>Welcome back {{username}}, join the discussions below, or create a new one!</p>
     <button>+</button>
 </div>
 {{!-- From there the user will have to things visible to them, one to the left that takes up the bulk of the page, as well as a list of usernames to the right --}}
 <main>
     {{!-- Left section contains open group chats where anyone can participate. Clicking on one will let you join in. --}}
-    {{#each groupchat}}
+    {{#each conversations}}
     <div class="">
         <div>
             <h3>Put usernames present in the chatroom here</h3>
