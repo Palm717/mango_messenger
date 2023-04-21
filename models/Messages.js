@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+const db = require('../config/connection');
 
 class Messages extends Model {}
 
@@ -11,12 +12,16 @@ Messages.init(
     },
     conversation_id: {
       type: DataTypes.INTEGER,
+      references: {
+        model: "Conversations",
+        key: "conversation_id",
+      }
     },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "users",
+        model: "Users",
         key: "user_id",
       },
     },
@@ -34,8 +39,5 @@ Messages.init(
     modelName: "Messages",
   }
 );
-
-Conversations.hasMany(Messages, { foreignKey: "conversation_id" });
-Messages.belongsTo(Conversations, { foreignKey: "conversation_id" });
 
 module.exports = Messages;
