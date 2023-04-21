@@ -1,6 +1,6 @@
 const Conversations = require("./Conversations");
 const Messages = require("./Messages");
-const UserConversation = require("./UserConversation");
+// const UserConversation = require("./UserConversation");
 const Users = require("./Users");
 
 Conversations.belongsToMany(Users, {
@@ -29,6 +29,5 @@ Messages.belongsTo(Users, {
 module.exports = {
   Conversations,
   Messages,
-  UserConversation,
   Users,
 };
