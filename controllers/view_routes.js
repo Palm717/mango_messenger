@@ -25,7 +25,7 @@ router.get("/dashboard", isAuthenticated, async (req, res) => {
     });
     const userBase = await Users.findAll();
     const user = await Users.findByPk(req.session.user_id);
-    res.render("private/dashboard", {
+    res.render("/dashboard", {
       username: user.username,
       conversations: conversations,
       userBase: userBase,

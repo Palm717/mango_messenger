@@ -1,6 +1,7 @@
 //require the correct modules
 const { Model, DataTypes } = require("sequelize");
 const db = require("../config/connection");
+const bcrypt = require("bcrypt");
 
 //extend sequelize model on class Users
 class Users extends Model {}

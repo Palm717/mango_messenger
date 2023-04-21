@@ -45,10 +45,10 @@ app.use(cookieParser());
 //Setup the req.session object for our routes
 app.use(sessionMiddleware);
 
-// app.use("/", [view_routes, auth_routes]);
+app.use("/", [view_routes, auth_routes]);
 
-app.use("/", view_routes);
-app.use("/", auth_routes);
+// app.use("/", view_routes);
+// app.use("/", auth_routes);
 
 io.engine.use(sessionMiddleware);
 
@@ -57,7 +57,7 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("socket connected!");
+  console.log("socket.id");
 
   socket.on("chat_message", async (data) => {
     const user_id = socket.request.session.user_id;
