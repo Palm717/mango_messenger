@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Users = require("../models/index");
+const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 
 //***LOGIN ROUTES */
@@ -27,13 +27,10 @@ router.post("/login", async (req, res) => {
 //***REGISTER ROUTES */
 router.post("/register", async (req, res) => {
   //user_data = {username, email, password}
-  const user_data = req.body;
-
   try {
-    const user = await Users.create(user_data);
-
-    req.session.user_id = user.id;
-    res.redirect("private/dashboard");
+    const newUser = await Users.create(req.body);
+    req.session.user_id = newUser.id;
+    res.redirect("/dashboard");
   } catch (err) {
     console.log(err);
     res.redirect("/");
