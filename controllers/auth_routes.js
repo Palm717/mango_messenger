@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 router.post("/login", async (req, res) => {
   //user_data = {email, password}
   const user_data = req.body;
+  console.log(user_data);
   const user = await Users.findOne({
     raw: true,
     where: {
@@ -17,10 +18,12 @@ router.post("/login", async (req, res) => {
 
   //Checks if the password matches, redirects them if not
   const valid_pass = bcrypt.compareSync(user_data.password, user.password);
+  console.log(valid_pass);
   if (!valid_pass) return res.redirect("/");
 
   //After success, store the id to session then redirect to the home dashboard
-  req.session.user_id = user.id;
+  req.session.user_id = user.user_id;
+  console.log(req.session)
   res.redirect("/dashboard");
 });
 
