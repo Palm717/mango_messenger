@@ -4,7 +4,7 @@ const {
   UserConversations,
   Users,
 } = require("../models/index");
-const db = require("./connection");
+const db = require("../config/connection");
 
 db.sync({ force: true }).then(() => {
   Conversations.bulkCreate([{}]).then(() => {

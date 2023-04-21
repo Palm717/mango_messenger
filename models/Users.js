@@ -1,5 +1,6 @@
 //require the correct modules
 const { Model, DataTypes } = require("sequelize");
+const db = require('../config/connection');
 
 //extend sequelize model on class Users
 class Users extends Model {}
