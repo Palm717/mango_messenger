@@ -22,7 +22,6 @@ router.get('/groupchat/:id', async (req, res) => {
   const conversationId = req.params.id;
   console.log(conversationId);
   try {
-    // const conversationData = await Conversations.findById(conversationId);
     const conversationData = await Conversations.findByPk(conversationId, {
       raw: true
     })

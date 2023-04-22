@@ -27,19 +27,6 @@ The user will have visible to them a header with nav bar. From there the user ca
     </div>
     {{/each}}
 
-    <div class="chat-box">
-        <h3>Chat</h3>
-        <div class="messages">
-            {{#each messages}}
-            <p><strong>{{this.sender}}:</strong> {{this.message_text}}</p>
-            {{/each}}
-        </div>
-        <form action="/sendmessage" method="POST" >
-            <input name="message" type="text" placeholder="Type your message here">
-            <button>Send</button>
-        </form>
-    </div>
-
     
     {{!-- Contains the userbase --}}
     <div>

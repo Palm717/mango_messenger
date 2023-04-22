@@ -14,10 +14,19 @@
     <h1>Group Chat {{conversation_id}}</h1>
         <p>Group Name: {{conversation_name}}</p>
     {{/with}}
-        {{!-- <ul>
-        {{#each conversationData.messages}}
-        <li>{{this}}</li>
-        {{/each}}
-        </ul> --}}
+    
 
+    <div class="chat-box">
+        <h3>Chat</h3>
+        <div class="messages">
+            {{#each messages}}
+            <p><strong>{{this.sender}}:</strong> {{this.message_text}}</p>
+            {{/each}}
+        </div>
+        <form action="/sendmessage" method="POST" >
+            <input name="message" type="text" placeholder="Type your message here">
+            <button>Send</button>
+        </form>
+    </div>
+    
 </main>
