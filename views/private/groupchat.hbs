@@ -1,0 +1,23 @@
+{{!-- Similar to dashboard, contains a header with links --}}
+<header>
+    <h1>Mango Messaging
+    </h1>
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+
+<main>
+    {{#with conversation}}
+    <h1>Group Chat {{conversation_id}}</h1>
+        <p>Group Name: {{conversation_name}}</p>
+    {{/with}}
+        {{!-- <ul>
+        {{#each conversationData.messages}}
+        <li>{{this}}</li>
+        {{/each}}
+        </ul> --}}
+
+</main>

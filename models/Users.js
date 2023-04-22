@@ -25,13 +25,6 @@ Users.init(
       allowNull: false,
       unique: true,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: 6,
-      },
-    },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -40,9 +33,12 @@ Users.init(
         isEmail: true,
       },
     },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: 6,
+      },
     },
   },
   {

@@ -14,7 +14,7 @@ The user will have visible to them a header with nav bar. From there the user ca
 <div class="greeting">
     <h2>Group Chats</h2>
     <p>Welcome back {{username}}, join the discussions below, or create a new one!</p>
-    <button>+</button>
+    <button id="newGroupChatBtn">Create a new Group Chat!</button>
 </div>
 {{!-- From there the user will have to things visible to them, one to the left that takes up the bulk of the page, as well as a list of usernames to the right --}}
 <main>
@@ -22,18 +22,32 @@ The user will have visible to them a header with nav bar. From there the user ca
     {{#each conversations}}
     <div class="">
         <div>
-            <h3>Put usernames present in the chatroom here</h3>
-            <h4>Chat started at this time/date</h4>
+            <h2 class="conversation-name" id="{{this.conversation_id}}">{{this.conversation_name}}</h2>
         </div>
     </div>
     {{/each}}
+
+    <div class="chat-box">
+        <h3>Chat</h3>
+        <div class="messages">
+            {{#each messages}}
+            <p><strong>{{this.sender}}:</strong> {{this.message_text}}</p>
+            {{/each}}
+        </div>
+        <form action="/sendmessage" method="POST" >
+            <input name="message" type="text" placeholder="Type your message here">
+            <button>Send</button>
+        </form>
+    </div>
+
+    
     {{!-- Contains the userbase --}}
     <div>
         {{!-- For each user, render them on the page. Get this working at a basic level.
         Then later on, display them with online users at the top (with an icon) and offline users at the bottom --}}
         <ul class="userBase">
-            {{#each user}}
-                <li>this.username goes here</li>
+            {{#each userBase}}
+                <li>{{this.username}} goes here</li>
             {{/each}}
         </ul>
     </div>
