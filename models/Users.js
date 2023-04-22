@@ -4,7 +4,14 @@ const db = require("../config/connection");
 const bcrypt = require("bcrypt");
 
 //extend sequelize model on class Users
-class Users extends Model {}
+class Users extends Model {
+  //Instance method to check if the form submitted password matches the saved user's encrypted password
+  async validatePass(provided_password) {
+    //bcrypt compare returns a boolean, based on if the string matches the encrypted string or not
+    const is_valid = await bcrypt.compare(provided_password, this.password);
+    return is_valid;
+  }
+}
 //Init Users and ttheir attributes
 Users.init(
   {
@@ -18,10 +25,6 @@ Users.init(
       allowNull: false,
       unique: true,
     },
-    password: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -30,9 +33,12 @@ Users.init(
         isEmail: true,
       },
     },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: 6,
+      },
     },
   },
   {
@@ -44,7 +50,7 @@ Users.init(
         //bcrypt will return an encrypted string mixing the standard password string with 10 levels of salt
         const encrypted_pass = await bcrypt.hash(Users.password, 10);
         //Store the encrypted password to the database instead of the standard string
-        Users.pass = encrypted_pass;
+        Users.password = encrypted_pass;
       },
     },
   }

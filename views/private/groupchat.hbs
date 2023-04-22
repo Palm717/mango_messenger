@@ -1,0 +1,32 @@
+{{!-- Similar to dashboard, contains a header with links --}}
+<header>
+    <h1>Mango Messaging
+    </h1>
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+
+<main>
+    {{#with conversation}}
+    <h1>Group Chat {{conversation_id}}</h1>
+        <p>Group Name: {{conversation_name}}</p>
+    {{/with}}
+    
+
+    <div class="chat-box">
+        <h3>Chat</h3>
+        <div class="messages">
+            {{#each messages}}
+            <p><strong>{{this.sender}}:</strong> {{this.message_text}}</p>
+            {{/each}}
+        </div>
+        <form action="/sendmessage" method="POST" >
+            <input name="message" type="text" placeholder="Type your message here">
+            <button>Send</button>
+        </form>
+    </div>
+    
+</main>

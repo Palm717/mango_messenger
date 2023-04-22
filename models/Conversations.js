@@ -10,25 +10,14 @@ Conversations.init(
   {
     conversation_id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING(50),
+    conversation_name: {
+      type: DataTypes.STRING,
       allowNull: false,
-    },
-    users: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Users",
-        key: "user_id",
-      },
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
+    }
   },
   {
     sequelize: db,

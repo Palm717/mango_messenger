@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 const db = require("./config/connection");
 const auth_routes = require("./controllers/auth_routes");
 const view_routes = require("./controllers/view_routes");
+const chat_routes = require("./controllers/chat_routes");
+const path = require("path");
 
 const app = express();
 const http = require("http");
@@ -27,7 +29,7 @@ app.use(express.json());
 // Allow the client to send through standard form data
 app.use(express.urlencoded({ extended: true }));
 //Loads the css to prevent MIME errors
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 //Setup handlebars
 app.engine(
   "hbs",
@@ -45,10 +47,7 @@ app.use(cookieParser());
 //Setup the req.session object for our routes
 app.use(sessionMiddleware);
 
-app.use("/", [view_routes, auth_routes]);
-
-// app.use("/", view_routes);
-// app.use("/", auth_routes);
+app.use("/", [view_routes, auth_routes, chat_routes]);
 
 io.engine.use(sessionMiddleware);
 
@@ -57,13 +56,16 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("socket.id");
-
+  console.log("A user connected!");
+  socket.on('disconnect', () => {
+    console.log('A user disconnected!');
+  })
+  
   socket.on("chat_message", async (data) => {
     const user_id = socket.request.session.user_id;
     const message_text = data.text;
 
-    const user = await User.findByPk(user_id);
+    const user = await Users.findByPk(user_id);
 
     const message = await user.createMessage({
       text: message_text,
