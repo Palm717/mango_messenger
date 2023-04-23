@@ -15,18 +15,10 @@
         <p>Group Name: {{conversation_name}}</p>
     {{/with}}
     
-
-    <div class="chat-box">
-        <h3>Chat</h3>
-        <div class="messages">
-            {{#each messages}}
-            <p><strong>{{this.sender}}:</strong> {{this.message_text}}</p>
-            {{/each}}
-        </div>
-        <form action="/sendmessage" method="POST" >
-            <input name="message" type="text" placeholder="Type your message here">
-            <button>Send</button>
-        </form>
-    </div>
+    <ul id="message-output"></ul>
+    <form id="form" action="">
+      <input id="message-input" type="text" autocomplete="off" /><button>Send</button>
+    </form>
+    
     
 </main>
