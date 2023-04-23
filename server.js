@@ -64,31 +64,52 @@ io.use((socket, next) => {
   sessionMiddleware(socket.request, {}, next);
 });
 
-io.on("connection", (socket) => {
-  console.log("A user connected!");
-  socket.on("disconnect", () => {
-    console.log("A user disconnected!");
-  });
+
+const { Users } = require("./models");
+
+
+
+
+
+io.on('connection', (socket) => {
+  console.log('socket connected!');
+
+  socket.on('chat_message', async (data) => {
 
   socket.on("chat_message", async (data) => {
+
     const user_id = socket.request.session.user_id;
     const message_text = data.text;
 
     const user = await Users.findByPk(user_id);
 
     const message = await user.createMessage({
-      text: message_text,
+      text: message_text
     });
 
-    socket.emit("chat_message", message);
+    io.emit('chat_message', message);
   });
 });
+
+
+
+
 
 db.sync().then(() => {
   server.listen(PORT, () =>
     console.log(`Server start at http://localhost:${PORT}`)
   );
 });
+
+
+
+// io.on("connection", (socket) => {
+//   console.log("A user connected!");
+//   socket.on("disconnect", () => {
+//     console.log("A user disconnected!");
+//   });
+// })
+
 
 // // The code JD gave:
 

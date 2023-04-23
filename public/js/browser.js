@@ -51,21 +51,35 @@ newConvo.addEventListener("click", (e) => {
 
 
 
+const socket = io();
+const messageOutput = document.getElementById('message-output');
+const messageInput = document.getElementById('message-input');
+console.log(messageInput)
 
 
-
-
-
-
-
-
-
-
-
-const socket = io("http://localhost:3000");
-socket.on("connect", () => {
-  displayMessage(`You connected with id: ${socket.id}`);
+socket.on('chat_message', data => {
+  messageOutput.insertAdjacentHTML('beforeend', `
+  <li>${data.text}</li>
+  `);
 });
+
+function chatMessage(e) {
+  const message_text = e.target.value;
+  console.log(message_text)
+
+  socket.emit('chat_message', {
+    text: message_text
+  });
+}
+
+messageInput.addEventListener('keydown', chatMessage);  
+
+
+
+
+
+
+
 
 // Everything below this point JD helped with Code
 
