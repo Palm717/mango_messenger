@@ -56,22 +56,16 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("A user connected!");
-  socket.on('disconnect', () => {
-    console.log('A user disconnected!');
-  })
+  socket.on('newuser', (username) => {
+    socket.broadcast.emit('update', username + " joined the conversation");
+  });
   
-  socket.on("chat_message", async (data) => {
-    const user_id = socket.request.session.user_id;
-    const message_text = data.text;
+  socket.on("chat", (message) => {
+    socket.broadcast.emit("chat", message);
+  });
 
-    const user = await Users.findByPk(user_id);
-
-    const message = await user.createMessage({
-      text: message_text,
-    });
-
-    socket.emit("chat_message", message);
+  socket.on("exituser", (username) => {
+    socket.broadcast.emit("update", username + ' left the conversation');
   });
 });
 
